@@ -225,7 +225,7 @@ VAR 심판: {get_val("varReferees")}"""
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ],
-            "max_tokens": 8192,
+            "max_tokens": 4096,  # 모델 컨텍스트 길이(8192) 초과 방지
             "temperature": 0.7,
             "top_p": 0.9,
             "stream": False

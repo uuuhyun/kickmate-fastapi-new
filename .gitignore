@@ -64,3 +64,8 @@ GITHUB_SETUP.md
 
 # Data files (GitHub에 업로드하지 않음, 용량이 큼)
 data/
+
+# Test output files
+test_presentation/output/
+test_output/
+test_runpod_demo.py
