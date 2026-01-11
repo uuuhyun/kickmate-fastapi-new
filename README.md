@@ -283,26 +283,27 @@ action_id,period_id,time_seconds,start_x,start_y,end_x,end_y,...
 ### Webhook + 폴링 하이브리드 방식
 
 ```
-┌─────────────┐    ① POST /jobs     ┌──────────────┐
-│   Spring    │────────────────────>│   FastAPI    │
-│  Backend    │  (10 actions)       │    Server    │
-└─────────────┘                     └──────────────┘
-       ↑                                    │
-       │         ② jobId: PENDING           ↓
-       │         (즉시 응답)            [Job Store]
-       │                                    │
-       │                                    ↓
-       │         ③ LLM 호출            ┌──────────────┐
-       │         (백그라운드)            │    RunPod    │
-       │                              │  Serverless  │
-       │                              │ SKT A.X-4.0  │
-       │                              └──────────────┘
-       │                                    │
-       │         ④ 10개 해설 생성             │
-       │         (tone + description)        │
-       │                                    ↓
-       │         ⑤ Webhook 전송         [Job Store]
-       └─────────────────────────────────────┘
+   [AWS EC2]                            [Azure App Service]
+┌─────────────┐                     ┌─────────────────────────────┐
+│   Spring    │  ① POST /jobs       │       FastAPI Server        │
+│  Backend    │────────────────────>│  ┌───────────────────────┐  │
+│             │    (10 actions)     │  │     Job Store         │  │
+└─────────────┘                     │  │   (In-memory Dict)    │  │
+       ↑                            │  └───────────────────────┘  │
+       │      ② jobId: PENDING      │             │               │
+       │      (즉시 응답)            │             ↓               │
+       │                            │     ③ LLM 호출 (백그라운드)   │
+       │                            └─────────────────────────────┘
+       │                                          │
+       │                                          ↓
+       │                                   ┌──────────────┐
+       │                                   │    RunPod    │
+       │                                   │  Serverless  │
+       │         ④ 10개 해설 생성           │ SKT A.X-4.0  │
+       │         (tone + description)      └──────────────┘
+       │                                          │
+       │         ⑤ Webhook 전송                    │
+       └──────────────────────────────────────────┘
             POST /ai/callback/ai-result
             (자동, 백업: 폴링 GET /jobs/{id})
 ```
