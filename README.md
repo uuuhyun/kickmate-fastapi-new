@@ -2,6 +2,13 @@
 
 RunPod Serverless LLM을 사용한 K리그 실시간 AI 해설 생성 FastAPI 백엔드
 
+## 관련 링크
+
+- **발표자료**: [킥메이트_발표자료.pdf](https://github.com/uuuhyun/kickmate-fastapi/blob/main/%ED%82%A5%EB%A9%94%EC%9D%B4%ED%8A%B8_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf)
+- **시연영상**: [DACON 코드 공유](https://dacon.io/competitions/official/236648/codeshare/13759)
+- **프론트엔드 (React + Vite)**: [seohyun1257/Kickmate](https://github.com/seohyun1257/Kickmate)
+- **백엔드 (Spring)**: [luna111122/kickmate](https://github.com/luna111122/kickmate)
+
 ## 프로젝트 개요
 
 시각장애인, 라디오 청취자, 축구 입문자를 위한 **배리어프리 AI 해설 서비스**의 백엔드 API입니다.
